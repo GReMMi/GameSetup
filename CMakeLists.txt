@@ -16,6 +16,10 @@ if(MSVC)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 add_compile_options(/arch:AVX2) #make sure SIMD optimizations take place
+else()
+	add_link_options(-static-libstdc++ -static-libgcc) #if you don't use msvc... which I don't Grem
+	add_compile_options(-mavx2 -mfma) #make sure SIMD optimize takes place, but something something
+
 endif()
 
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) #link time optimization
