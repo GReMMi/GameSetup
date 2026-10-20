@@ -46,7 +46,9 @@ add_subdirectory(thirdparty/rlImGui)
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 
-add_executable("${CMAKE_PROJECT_NAME}")
+add_executable("${CMAKE_PROJECT_NAME}"
+		src/gameLayer/gameMain.cpp
+		src/gameLayer/gameMain.h)
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
 
@@ -82,7 +84,8 @@ if(MSVC) # If using the VS compiler...
 endif()
 
 target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include/")
-
+target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/platform/")
+target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/gameLayer/")
 
 
 # Link raylib library statically, Here wou would add other libraries!
